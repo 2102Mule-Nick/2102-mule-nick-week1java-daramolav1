@@ -15,7 +15,7 @@ public class EvaluationService {
 	 */
 	public String reverse(String string) {
 		char[] reversed = new char[string.length()];
-		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
+		for (int i = reversed.length - 1, j = 0; i >= 0; i--, j++) {
 			reversed[j] = string.charAt(i);
 		}
 		return new String(reversed);
@@ -30,8 +30,15 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String acronym = "";
+		acronym += phrase.toUpperCase().charAt(0);
+
+		for (int i = 1; i <= phrase.length() - 1; i++) {
+			if (phrase.charAt(i - 1) == ' ' || phrase.charAt(i - 1) == '-') {
+				acronym += phrase.toUpperCase().charAt(i);
+			}
+		}
+		return acronym;
 	}
 
 	/**
@@ -84,18 +91,25 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne == sideTwo && sideTwo == sideThree)
+				return true;
+			else
+				return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if ((sideOne == sideTwo && sideTwo != sideThree) || (sideOne == sideThree && sideTwo != sideThree)
+					|| (sideTwo == sideThree && sideOne != sideThree))
+				return true;
+			else
+				return false;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne == sideTwo || sideTwo == sideThree || sideOne == sideThree)
+				return false;
+			else
+				return true;
 		}
 
 	}
@@ -116,8 +130,81 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+
+		for (int i = 0; i < string.length(); i++) {
+			char letter = string.charAt(i);
+			switch (letter) {
+			case 'a':
+			case 'A':
+			case 'e':
+			case 'E':
+			case 'i':
+			case 'I':
+			case 'o':
+			case 'O':
+			case 'u':
+			case 'U':
+			case 'l':
+			case 'L':
+			case 'n':
+			case 'N':
+			case 'r':
+			case 'R':
+			case 's':
+			case 'S':
+			case 't':
+			case 'T':
+				score += 1;
+				break;
+			case 'd':
+			case 'D':
+			case 'g':
+			case 'G':
+				score += 2;
+				break;
+			case 'b':
+			case 'B':
+			case 'c':
+			case 'C':
+			case 'm':
+			case 'M':
+			case 'p':
+			case 'P':
+				score += 3;
+				break;
+			case 'f':
+			case 'F':
+			case 'h':
+			case 'H':
+			case 'v':
+			case 'V':
+			case 'w':
+			case 'W':
+			case 'y':
+			case 'Y':
+				score += 4;
+				break;
+			case 'k':
+			case 'K':
+				score += 5;
+				break;
+			case 'j':
+			case 'J':
+			case 'x':
+			case 'X':
+				score += 8;
+				break;
+			case 'q':
+			case 'Q':
+			case 'z':
+			case 'Z':
+				score += 10;
+				break;
+			}
+		}
+
+		return score;
 	}
 
 	/**
@@ -153,7 +240,20 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String number = "";
+		int count = 0;
+		for (int i = 0; i < string.length(); i++) {
+			char digit = string.charAt(i);
+			if (digit == '-' || digit == ' ' || digit == '(' || digit == ')' || digit == '.' || digit == '@' || digit == ':' || digit == '!' || digit == 'a' || digit == 'b' || digit == 'c') {
+				continue;
+			}
+			number = number + string.charAt(i);
+			count++;
+		}
+		if(count != 10) {
+			throw new IllegalArgumentException();
+		}
+		return number;
 	}
 
 	/**
